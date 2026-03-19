@@ -1,0 +1,42 @@
+<%- include('includes/head') %>
+<%- include('includes/nav') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2"></div>
+
+    <div class="col-lg-8 my-5">
+      <h1 class="text-center">Estoque de cestas básicas</h1>
+      <% if (cestas.length == 0) { %>
+        <p class="text-center lead">Você ainda não tem nenhuma cesta cadastrada </p>
+      <% } else { %>
+      <p class="text-center lead">O estoque está abaixo</p>
+
+      <%- include('includes/messages') %>
+
+      <div class="responsive-table">
+        <table class="table my-3">
+        <tr>
+          <th>Tipo</th>
+          <th>Quantidade</th>
+          <th>Descrição</th>
+          <th>Atualizado em:</th>
+        </tr>
+        <% cestas.forEach(cesta => {  %>
+          <tr>
+            <td> <%= cesta.tipo %> </td>
+            <td> <%= cesta.quantidade %> </td>
+            <td> <%= cesta.descricao %> </td>
+            <td> <%= cesta.ultimaAtualizacao %> </td>
+          </tr>
+          <% }); %>
+        </table>
+        <% } %>
+      </div>
+    </div>
+
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+
+<%- include('includes/footer')%>

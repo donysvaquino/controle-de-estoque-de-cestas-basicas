@@ -1,0 +1,36 @@
+<%- include('includes/head') %>
+<%- include('includes/nav') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2"></div>
+
+    <div class="col-lg-8 my-5">
+      <h1 class="text-center">Cestas</h1>
+      <p class="text-center lead">Cadastre novas cestas</p>
+
+      <%- include('includes/messages') %>
+
+        <form action="/cesta" method="POST">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <div class="form-group">
+            <label>Tipo</label>
+            <select name="tipo">
+              <option value="Tipo A">Cesta Família (Tipo A)</option>
+              <option value="Tipo B">Cesta Casal (Tipo B)</option>
+              <option value="Tipo C">Cesta Individual (Tipo C)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Quantidade</label>
+            <input type="number" class="form-control" name="quantidade">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+      </form>   
+
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+
+<%- include('includes/footer')%>
