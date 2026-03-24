@@ -1,0 +1,42 @@
+<%- include('includes/head') %>
+<%- include('includes/nav') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2"></div>
+
+    <div class="col-lg-8 my-5">
+      <h1 class="text-center">Estoque de produtos</h1>
+      <% if (produtos.length == 0) { %>
+        <p class="text-center lead">Você ainda não tem nenhum produto cadastrado </p>
+      <% } else { %>
+      <p class="text-center lead">O estoque está abaixo</p>
+
+      <%- include('includes/messages') %>
+
+      <div class="responsive-table">
+        <table class="table my-3">
+        <tr>
+          <th>Nome</th>
+          <th>Descrição</th>
+          <th>Quantidade</th>
+          <th>Atualizado em:</th>
+        </tr>
+        <% produtos.forEach(produto => {  %>
+          <tr>
+            <td> <%= produto.nome %> </td>
+            <td> <%= produto.descricao %> </td>
+            <td> <b>+</b> <%= produto.quantidade %> <b>-</b> </td>
+            <td> <%= produto.ultimaAtualizacao %> </td>
+          </tr>
+          <% }); %>
+        </table>
+        <% } %>
+      </div>
+    </div>
+
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+
+<%- include('includes/footer')%>
