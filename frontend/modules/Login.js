@@ -1,7 +1,6 @@
 export default class Login {
     constructor(formClass) {
         this.form = document.querySelector(formClass);
-        console.log('Formulário encontrado:', this.form);
     }
 
     verificar() {

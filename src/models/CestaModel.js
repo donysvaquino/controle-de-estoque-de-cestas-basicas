@@ -5,8 +5,21 @@ const cestaSchema = new mongoose.Schema ( {
     tipo: {type: String, required: true},
     quantidade: {type: Number, required: true},
     descricao: {type: String, required: true},
-    ultimaAtualizacao: { type: Date, default: Date.now }
+    ultimaAtualizacao: { type: Date, default: Date.now, get: v => v?.toLocaleString('pt-BR').slice(0, 17)  }    
+}, { 
+    toJSON: { getters: true },
+    toObject: { getters: true } 
 });
+
+const options = {
+    transform: (doc, ret) => {
+        ret.ultimaAtualizacao = ret.ultimaAtualizacao?.toLocaleString('pt-BR').slice(0, 17);
+        return ret;
+    }
+};
+
+cestaSchema.set('toJSON', options);
+cestaSchema.set('toObject', options);
 
 const CestaModel = mongoose.model('Cesta', cestaSchema);
 
