@@ -15,4 +15,10 @@ route.post('/cadastrar/cestas', cestaController.registrar);
 route.get('/cadastrar/produtos', produtosController.cadastrar);
 route.get('/listar/produtos', produtosController.listar);
 route.post('/cadastrar/produtos', produtosController.registrar);
+
+//Adicionar
+route.get('/estoque/produtos/add/:id', produtosController.add);
+
+//Remover
+route.get('/estoque/produtos/remove/:id', produtosController.remove);
 module.exports = route; 

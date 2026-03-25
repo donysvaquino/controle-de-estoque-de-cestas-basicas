@@ -66,4 +66,17 @@ Produto.buscaProdutos = async () => {
     const produtos = await ProdutoModel.find().sort({ ultimaAtualizacao: -1 });
     return produtos;
 }
+
+Produto.add = async (id) => {
+    if (typeof id !== 'string') return; 
+    const produto = await ProdutoModel.findOneAndUpdate({ _id: id }, { $inc: { quantidade: 1}})
+    return produto;
+}
+
+Produto.remove = async (id) => {
+    if (typeof id !== 'string') return; 
+    const produto = await ProdutoModel.findOneAndUpdate({ _id: id }, { $inc: { quantidade: -1}})
+    return produto;
+}
+
 module.exports = Produto;

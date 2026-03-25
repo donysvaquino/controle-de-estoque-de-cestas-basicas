@@ -26,7 +26,11 @@
           <tr>
             <td> <%= produto.nome %> </td>
             <td> <%= produto.descricao %> </td>
-            <td> <b>+</b> <%= produto.quantidade %> <b>-</b> </td>
+            <td> 
+              <a href="/estoque/produtos/add/<%= produto._id %>"><b>+</b></a>
+              <%= produto.quantidade %> 
+              <a href="/estoque/produtos/remove/<%= produto._id %>"><b>-</b></a>
+            </td>
             <td> <%= produto.ultimaAtualizacao %> </td>
           </tr>
           <% }); %>
