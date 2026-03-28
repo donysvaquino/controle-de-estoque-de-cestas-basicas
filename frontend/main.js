@@ -1,9 +1,11 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-import Login from './modules/Login';
+const container = document.querySelector('.maisProdutos');
+const templateSelect = document.querySelector('#templateSelect');
+const addCampo = document.querySelector('#addCampo');
 
-const login = new Login('.form-login');
-const cadastro = new Login('.form-cadastro');
-login.verificar();
-cadastro.verificar();
+addCampo.addEventListener('click', () => {
+    const htmlDoTemplate = templateSelect.innerHTML;
+    container.insertAdjacentHTML('beforeend', htmlDoTemplate);
+})

@@ -38,7 +38,7 @@ exports.add = async (req, res) => {
 }
 
 exports.remove = async (req, res) => {
-    console.log("removendo,mano")
+
     if (!req.params.id) return res.render('404');
     const produto = await Produto.remove(req.params.id);  
     if (!produto) return res.render('404'); 

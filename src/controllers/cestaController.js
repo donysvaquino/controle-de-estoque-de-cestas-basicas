@@ -1,4 +1,10 @@
 const Cesta = require('../models/CestaModel')
+const Produto = require('../models/ProdutoModel')
+
+exports.index = async (req, res) => {
+    const produtos = await Produto.buscaProdutos();
+    res.render('cestaPadrao', { produtos });
+}
 
 exports.listar = async function (req, res) {
     const cestas = await Cesta.buscaCestas();

@@ -75,7 +75,10 @@ Produto.add = async (id) => {
 
 Produto.remove = async (id) => {
     if (typeof id !== 'string') return; 
-    const produto = await ProdutoModel.findOneAndUpdate({ _id: id }, { $inc: { quantidade: -1}})
+    const produto = await ProdutoModel.findOneAndUpdate(
+        { _id: id, quantidade: { $gt: 0} },
+        { $inc: { quantidade: -1} },
+    );
     return produto;
 }
 

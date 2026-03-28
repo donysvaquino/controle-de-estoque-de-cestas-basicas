@@ -11,6 +11,9 @@ route.get('/cadastrar/cestas', cestaController.cadastrar);
 route.get('/listar/cestas', cestaController.listar);
 route.post('/cadastrar/cestas', cestaController.registrar);
 
+//Cesta padrão
+route.get('/cadastrar/cestaPadrao', cestaController.index)
+
 //Rotas de produtos
 route.get('/cadastrar/produtos', produtosController.cadastrar);
 route.get('/listar/produtos', produtosController.listar);
