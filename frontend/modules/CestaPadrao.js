@@ -16,16 +16,21 @@ export default function CestaPadrao() {
     const produtosAdicionados = [];
     
     const salvarNoLocalStorage = () => {
-        const nomeDaCesta = form.querySelector('input[name="nomeDaCesta"]');
+        const inputNomeDaCesta = form.querySelector('input[name="nomeDaCesta"]');
         const todosSelects = form.querySelectorAll('select[name="opcoes"]');
         const todasQtds = form.querySelectorAll('input[name="quantidade"]');
         
-        const estadoAtual = Array.from(todosSelects).map((select, i) => {
+        const produtosAtuais = Array.from(todosSelects).map((select, i) => {
             return {
                 produto: select.options[select.selectedIndex].text,
-                quantidade: todasQtds[i].value || 0 // Pega o valor ou 0 se estiver vazio
+                quantidade: todasQtds[i].value || 0 
             }
         });
+
+        const estadoAtual = {
+            nomeCesta: inputNomeDaCesta.value,
+            produtos: produtosAtuais
+        };
 
         localStorage.setItem('cestaTemporaria', JSON.stringify(estadoAtual));
         console.log('Dados sincronizados:', estadoAtual);
@@ -35,11 +40,22 @@ export default function CestaPadrao() {
         salvarNoLocalStorage();
     });
 
+    form.addEventListener('change', () => {
+        salvarNoLocalStorage();
+    });
+
     const carregarDadosSalvos = () => {
         const dadosRaw = localStorage.getItem('cestaTemporaria');
         if (!dadosRaw) return;
 
         const dados = JSON.parse(dadosRaw);
+
+        if (dados.nomeCesta) {
+            const inputNomeDaCesta = form.querySelector('input[name="nomeDaCesta"]');
+            if (inputNomeDaCesta) inputNomeDaCesta.value = dados.nomeCesta;
+        }
+
+        if (!dados.produtos) return;
 
         const inputsIniciais = form.querySelectorAll('select[name="opcoes"]').length;
 
@@ -54,7 +70,7 @@ export default function CestaPadrao() {
         const todosSelects = form.querySelectorAll('select[name="opcoes"]');
         const todasQtds = form.querySelectorAll('input[name="quantidade"]');
 
-        dados.forEach((item, i) => {
+        dados.produtos.forEach((item, i) => {
             if (todosSelects[i]) {
                 const options = Array.from(todosSelects[i].options);
                 const indexOpcao = options.findIndex(opt => opt.text === item.produto);
@@ -69,5 +85,6 @@ export default function CestaPadrao() {
             }
         });
     };
+
     carregarDadosSalvos();
 }
